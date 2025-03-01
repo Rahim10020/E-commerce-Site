@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import JsonResponse
 from .models import Product, ShippingAddress, Customer, Order, OrderItem
 
 
@@ -10,7 +11,6 @@ def store(request):
         'products': products
     }
     return render(request, 'store/store.html', context)
-
 
 def cart(request):
     if request.user.is_authenticated:
@@ -26,7 +26,6 @@ def cart(request):
     }
     return render(request, 'store/cart.html', context)
 
-
 def checkout(request):
     if request.user.is_authenticated:
         customer = request.user.customer
@@ -40,3 +39,6 @@ def checkout(request):
         'order': order
     }
     return render(request, 'store/checkout.html', context)
+
+def update_item(request):
+    return JsonResponse("Item added sucessfully", safe=False)
